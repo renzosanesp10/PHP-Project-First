@@ -1,5 +1,4 @@
-
-    <?php
+<?php
 
     session_start();
 
@@ -11,8 +10,10 @@
 
 
     // $validar_login = mysqli_query($conexion, "select * from usuarios where correo='$correo' and contrasena=$contrasena");
-    $validar_login = mysqli_query($conexion, "select rol_id, usuario from usuarios where correo='$correo' and contrasena=$contrasena");
+    $validar_login = mysqli_query($conexion, "select rol_id, usuario from usuarios where correo='$correo' and contrasena='$contrasena'");
     $row = mysqli_fetch_array($validar_login, MYSQLI_ASSOC);
+
+    $_SESSION['usuario'] = $row["usuario"];
 
     switch ($row["rol_id"]) {
         case '1':
@@ -47,7 +48,3 @@
         ';
         exit;
     } */
-
-
-
-    ?>
