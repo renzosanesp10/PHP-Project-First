@@ -1,3 +1,8 @@
+<?php
+include_once("./php/helpers.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
