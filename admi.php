@@ -1,9 +1,6 @@
-<?php if ((isset($_SESSION['nombre_completo']))&& ($_SESSION['nombre_completo'] !="")){
-    echo "Hola ".$_SESSION['nombre_completo'];
-}
-
+<?php
+    session_start();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +14,7 @@
 
 </head>
 <body>
-    <h1>Bienvenido Administrador!!</h1>
+    <h1>Bienvenido Administrador <?php echo $_SESSION["usuario"] ?>!!</h1>
     <a href= "php/cerrar_sesion.php">Cerrar Sesion</a>
 </body>
 </html>

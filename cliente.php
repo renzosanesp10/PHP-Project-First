@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -31,7 +35,7 @@
                 <p class="main-header__txt"><i class="fas fa-phone"></i> TEL 415782</p>
             </div>
             <div class="main-header__container">
-                <a href="login.php" class="main-header__link"><i class="fas fa-user"></i></a>
+                <a href="login.php" class="main-header__link"><i class="fas fa-user"></i><?php echo $_SESSION['usuario'] ?></a>
                 <a href="" class="main-header__btn">Carrito <i class="fas fa-shopping-cart"></i></a>
                 <input type="search" class="main-header__input" placeholder="Buscar productos"><i class="fas fa-search"></i>
             </div>
