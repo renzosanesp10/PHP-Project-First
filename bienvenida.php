@@ -28,7 +28,7 @@
 
 </head>
 <body>
-    <h1>Bienvenidos!!</h1>
+    <h1>¿Deseas Cerrar Sesion?</h1>
     <a href= "php/cerrar_sesion.php">Cerrar Sesion</a>
 </body>
 </html>

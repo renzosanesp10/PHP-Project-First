@@ -44,7 +44,7 @@ img{
     z-index: 999999;
     
     
-   
+    
 }
 .menu{
     position: absolute;
@@ -189,6 +189,24 @@ img{
     margin: 20px auto;
     transition: all 0.5s;
 }
+.btn-pendiente{
+    display: block;
+    border: 1px solid #46A2FD;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    width: 150px;
+    margin: 20px auto;
+    transition: all 0.5s;
+}
+
+.btn-pendiente:hover{
+    background: #46A2FD;
+    color: white;
+
+}
+
 .btn-shop:hover{
     background: #46A2FD;
     color: white;
@@ -342,7 +360,7 @@ img{
 
 @media screen and (min-width:700px){
     .slider{
-       height: 400px; 
+        height: 450px; 
     }
     .editor__item{
         height: 300px;

@@ -1,7 +1,7 @@
 <?php
 
 
-$conexion = mysqli_connect("localhost", "root", "", "basedatospaginaweb");
+        $conexion = mysqli_connect("localhost" , "root" , "" , "basedatospaginaweb");
 
     /* if($conexion){
         echo 'Conectado exitosamente a la Base de Datos';

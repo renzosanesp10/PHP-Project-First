@@ -1,5 +1,16 @@
 <?php
 session_start();
+if(!isset($_SESSION['usuario'])){
+    echo'
+        <script>
+                alert("Por favor debes iniciar sesion");
+                window.location = "login.php";
+                </script>
+    ';
+    session_destroy();
+    die();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +34,10 @@ session_start();
                 <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
                 <nav class="main-nav" id="main-nav">
                     <ul class="menu">
-                        <li class="menu__item"><a href="index.html" class="menu__link">Inicio</a></li>
-                        <li class="menu__item"><a href="" class="menu__link">Nosotros</a></li>
-                        <li class="menu__item"><a href="" class="menu__link">Productos</a></li>
-                        <li class="menu__item"><a href="" class="menu__link">Contact</a></li>
+                        <li class="menu__item"><a href="cliente.php" class="menu__link">Inicio</a></li>
+
+                        <li class="menu__item"><a href="./productos-cliente.php" class="menu__link">Productos</a></li>
+                        <li class="menu__item"><a href="./contacto-cliente.php" class="menu__link">Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -35,9 +46,9 @@ session_start();
                 <p class="main-header__txt"><i class="fas fa-phone"></i> TEL 415782</p>
             </div>
             <div class="main-header__container">
-                <a href="login.php" class="main-header__link"><i class="fas fa-user"></i><?php echo $_SESSION['usuario'] ?></a>
-                <a href="" class="main-header__btn">Carrito <i class="fas fa-shopping-cart"></i></a>
-                <input type="search" class="main-header__input" placeholder="Buscar productos"><i class="fas fa-search"></i>
+                <a href="" class="main-header__link"><i class="fas fa-user"></i><?php echo $_SESSION['usuario'] ?></a>
+                <a href="" class="main-header__btn">Carrito( <?php echo(empty($_SESSION['carrito']))?0:count($_SESSION['carrito']);  ?>) <i class="fas fa-shopping-cart"></i></a>
+                <a href= "php/cerrar_sesion.php"   class="main-header__btn">Cerrar Sesion</a>
             </div>
         </div>
     </header>
@@ -52,7 +63,7 @@ session_start();
                 </div>
             </div>
             <div class="slider__section">
-                <img src="img/slider3.jpg" alt="" class="slider__img">
+                <img src="img/terno1.jpg" alt="" class="slider__img">
                 <div class="slider__content">
                     <h2 class="slider__title">Bazar Espejo</h2>
                     <p class="slider__txt">¡En esta etapa digital... conectate con tu bazar!</p>
@@ -60,7 +71,7 @@ session_start();
                 </div>
             </div>
             <div class="slider__section">
-                <img src="img/slider2.jpg" alt="" class="slider__img">
+                <img src="img/terno2.jpg" alt="" class="slider__img">
                 <div class="slider__content">
                     <h2 class="slider__title">Bazar Espejo</h2>
                     <p class="slider__txt">Viste a la moda en Bazar Espejo</p>
@@ -68,7 +79,7 @@ session_start();
                 </div>
             </div>
             <div class="slider__section">
-                <img src="img/afiliaciones.jpg" alt="" class="slider__img">
+                <img src="img/ropaa.jpg" alt="" class="slider__img">
                 <div class="slider__content">
                     <h2 class="slider__title">Bazar Espejo</h2>
                     <p class="slider__txt">Ropa de la mejor marca y al mejor precio</p>
@@ -90,7 +101,7 @@ session_start();
                         <h3 class="product__tittle">Camisa Baronet</h3>
                         <span class="product__price">S/. 80</span>
                     </div>
-                    <a href="" class="product__icon fas fa-cart-plus"></a>
+                    <a href="./php/formulario.php" class="product__icon fas fa-cart-plus"></a>
                 </div>
                 <div class="product">
                     <img src="./img/pantalon.jpg" alt="" class="product__img">
@@ -98,7 +109,7 @@ session_start();
                         <h3 class="product__tittle">Pantalon Jhon Holden</h3>
                         <span class="product__price">S/. 150</span>
                     </div>
-                    <a href="" class="product__icon fas fa-cart-plus"></a>
+                    <a href="./php/formulario.php" class="product__icon fas fa-cart-plus"></a>
                 </div>
                 <div class="product">
                     <img src="img/medias.jpg" alt="" class="product__img">
@@ -106,7 +117,7 @@ session_start();
                         <h3 class="product__tittle">Medias Baronet</h3>
                         <span class="product__price">S/. 25</span>
                     </div>
-                    <a href="" class="product__icon fas fa-cart-plus"></a>
+                    <a href="./php/formulario.php" class="product__icon fas fa-cart-plus"></a>
                 </div>
                 <div class="product">
                     <img src="./img/corbata.jpg" alt="" class="product__img">
@@ -114,7 +125,7 @@ session_start();
                         <h3 class="product__tittle">Corbata Baronet</h3>
                         <span class="product__price">S/. 35</span>
                     </div>
-                    <a href="" class="product__icon fas fa-cart-plus"></a>
+                    <a href="./php/formulario.php" class="product__icon fas fa-cart-plus"></a>
                 </div>
             </section>
 
@@ -133,47 +144,45 @@ session_start();
                 <div class="tip">
                     <i class="far fa-hand-paper"></i>
                     <h2 class="tip__title">Satisfaction Garantizada</h2>
-                    <p class="tip__txt">Bazar Espejo lleva </p>
-                    <a href="" class="btn-shop">Comprar Ahora</a>
+                    <p class="tip__txt">Bazar Espejo lleva mas de 30 años de experiencia en el mercado</p>
+                    
                 </div>
                 <div class="tip">
                     <i class="fas fa-rocket"></i>
-                    <h2 class="tip__title">Fast Shipping</h2>
-                    <p class="tip__txt">Entrega Inmediara a domicilio</p>
-                    <a href="" class="btn-shop">Comprar Ahora</a>
+                    <h2 class="tip__title">¡Entrega Rapida a Domicilio!</h2>
+                    <p class="tip__txt">Gracias a que contamos con un servicio de delivery, el adquirir tus productos es mucho mas facil</p>
+                    
                 </div>
                 <div class="tip">
                     <i class="fas fa-cog"></i>
-                    <h2 class="tip__title">UV Protection</h2>
-                    <p class="tip__txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint aut sequi voluptatibus ab totam velit explicabo corrupti sed doloremque natus, eligendi saepe. Quaerat nulla odit quibusdam, placeat unde voluptas est.</p>
-                    <a href="" class="btn-shop">Comprar Ahora</a>
+                    <h2 class="tip__title">Los mejores sastres</h2>
+                    <p class="tip__txt">Contamos con los mejores sastres de Trujillo</p>
+                    
                 </div>
             </section>
         </div>
     </main>
     <footer class="main-footer">
         <div class="footer__section">
-            <h2 class="footer__title">About Us</h2>
+            <h2 class="footer__title">Sobre Nosotros</h2>
             <p class="footer__txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere unde totam suscipit consequatur repellendus. Quasi adipisci deleniti quae itaque animi fugiat laborum, optio aliquam rerum, magnam omnis enim eum molestias!</p>
         </div>
         <div class="footer__section">
-            <h2 class="footer__title">Location</h2>
+            <h2 class="footer__title">Ubicacion</h2>
             <p class="footer__txt">Trujillo, Peru</p>
-            <h2 class="footer__title">Contact</h2>
+            <h2 class="footer__title">Contacto</h2>
             <p class="footer__txt">Celular: 999999942</p>
             <p class="footer__txt">Correo: renzosanesp@hotmail.com</p>
         </div>
         <div class="footer__section">
             <h2 class="footer__title">Quick Links</h2>
             <a href="" class="footer__link">Home</a>
-            <a href="" class="footer__link">About</a>
-            <a href="" class="footer__link">Error</a>
             <a href="" class="footer__link">Shop</a>
             <a href="" class="footer__link">Contact Us</a>
         </div>
         <div class="footer__section">
-            <h2 class="footer__title">Sign up for your offers</h2>
-            <p class="footer__txt">By suscribing to our mailing list you will always get latest news and updates from us.</p>
+            <h2 class="footer__title">Suscribete para recibir ofertas</h2>
+            <p class="footer__txt">Al suscribirse a nuestra lista de correo, siempre recibirá nuestras últimas noticias y actualizaciones.</p>
             <input type="email" class="footer__input" placeholder="Ingresa tu email">
         </div>
         <p class="copy">© 2018 Goggles. All Rights Reserved</p>
