@@ -49,40 +49,42 @@ if (!isset($_SESSION['usuario'])) {
             </div>
             <div class="main-header__container">
                 <a href="" class="main-header__link"><i class="fas fa-user"></i><?php echo $_SESSION['usuario'] ?></a>
-                <a href= "php/cerrar_sesion.php" class="main-header__btn">Cerrar Sesion</a>
+                <a href="php/cerrar_sesion.php" class="main-header__btn">Cerrar Sesion</a>
             </div>
         </div>
     </header>
-    <?php 
+    <?php
     $sql = "SELECT * FROM productos";
     $resultado = mysqli_query($conexion, $sql);
     $filas = mysqli_fetch_all($resultado);
     ?>
 
-<div class="row">
-        <?php
-        foreach ($filas as $value) { ?>
-            <div class="col-3">
-                <div class="card mb-4" style="max-height: 100%;">
-                    <img class="card-img-top" src="<?php echo $value[4]?>" alt="<?php echo $value[1]?>"  height="317px">
-                    <div class="card-body">
-                        <span><?php echo $value[1] ?></span>
-                        <h5 class="card-title">S/. <?php echo $value[2] ?></h5>
-                        <p class="card-text"><?php echo $value[3]?></p>
-                        <form action="" method="POST">
-                            <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($value[0],COD,KEY);  ?>">
-                            <input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($value[1],COD,KEY)?> ">
-                            <input type="hidden" name="precio" id="precio" value="<?php echo openssl_encrypt($value[2],COD,KEY)?> ">
-                            <input type="hidden" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1,COD,KEY)?>  ">
-                            
-                        </form>
+    <div class="container-fluid">
+        <div class="row">
+            <?php
+            foreach ($filas as $value) { ?>
+                <div class="col-3">
+                    <div class="card mb-4" style="max-height: 100%;">
+                        <img class="card-img-top" src="./<?php echo $value[4] ?>" alt="<?php echo $value[1] ?>" height="317px">
+                        <div class="card-body">
+                            <span><?php echo $value[1] ?></span>
+                            <h5 class="card-title">S/. <?php echo $value[2] ?></h5>
+                            <p class="card-text"><?php echo $value[3] ?></p>
+                            <form action="" method="POST">
+                                <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($value[0], COD, KEY);  ?>">
+                                <input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($value[1], COD, KEY) ?> ">
+                                <input type="hidden" name="precio" id="precio" value="<?php echo openssl_encrypt($value[2], COD, KEY) ?> ">
+                                <input type="hidden" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1, COD, KEY) ?>  ">
+
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php } ?>
+            <?php } ?>
 
+        </div>
     </div>
-    
+
     <footer class="main-footer">
         <div class="footer__section">
             <h2 class="footer__title">Sobre Nosotros</h2>
@@ -117,6 +119,5 @@ if (!isset($_SESSION['usuario'])) {
     <script src="./js/login.js"></script>
 
 </body>
-
 
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-include("/xamp/htdocs/PaginaWeb/php/conexion.php");
+include("../php/conexion.php");
 
 $sql = "SELECT * FROM productos";
 $resultado = mysqli_query($conexion, $sql);
@@ -50,8 +50,8 @@ if (!isset($_SESSION['usuario'])) {
                 <p class="main-header__txt"><i class="fas fa-phone"></i> TEL 415782</p>
             </div>
             <div class="main-header__container">
-            <a href="" class="main-header__link"><i class="fas fa-user"></i><?php echo $_SESSION['usuario'] ?></a>
-                <a href= "../php/cerrar_sesion.php" class="main-header__btn">Cerrar Sesion</a>
+                <a href="" class="main-header__link"><i class="fas fa-user"></i><?php echo $_SESSION['usuario'] ?></a>
+                <a href="../php/cerrar_sesion.php" class="main-header__btn">Cerrar Sesion</a>
             </div>
         </div>
     </header>
@@ -85,9 +85,10 @@ if (!isset($_SESSION['usuario'])) {
                             <th>ID</th>
                             <th>Nombre Producto</th>
                             <th>Precio</th>
-                            <th>Descripcion </th>
+                            <th>Descripcion</th>
+                            <th>Imagen</th>
                             <th>Talla</th>
-                            
+
                             <th></th>
                             <th></th>
                         </tr>
@@ -95,16 +96,17 @@ if (!isset($_SESSION['usuario'])) {
 
                     <tbody>
                         <?php
-                        while ($row = mysqli_fetch_array($resultado)) {
+                        foreach ($resultado as $row) {
                         ?>
                             <tr>
                                 <th><?php echo $row['id_producto'] ?></th>
                                 <th><?php echo $row['nombre_producto'] ?></th>
                                 <th><?php echo $row['precio_producto'] ?></th>
                                 <th><?php echo $row['descripcion_producto'] ?></th>
+                                <th><img src="../<?php echo $row['imagen_producto'] ?>" alt="<?php echo $row['id_producto'] . '-' . $row['nombre_producto'] ?>" width="150" height="100"></th>
                                 <th><?php echo $row['talla_producto'] ?></th>
                                 <th><a href="./actualizar-producto.php?id_producto=<?php echo $row['id_producto'] ?>" class="btn btn-info">Editar</a></th>
-                                <th><a href="./delete-producto.php?id_producto=<?php echo $row['id_producto'] ?>" class="btn btn-danger">Eliminar</a></th>
+                                <th><a href="./delete-producto.php?id_producto=<?php echo $row['id_producto'] ?>" id="delete-producto" class="btn btn-danger">Eliminar</a></th>
                             </tr>
                         <?php }  ?>
                     </tbody>
@@ -112,40 +114,38 @@ if (!isset($_SESSION['usuario'])) {
 
             </div>
         </div>
-        <br>
-        <br>
+    </div>
+    <footer class="main-footer mt-5">
+        <div class="footer__section">
+            <h2 class="footer__title">Sobre Nosotros</h2>
+            <p class="footer__txt">Somos una empresa dedicada a la venta online de ropa. Nuestro objetivo es ofrecer la moda más actual a los mejores precios.
+                Tenemos a su disposición una gran variedad de productos, los cuales son renovados cada temporada.
+                Tenemos un equipo que está dedicado a satisfacer tus necesidades y que te contestará a tus dudas con la mayor brevedad posible.</p>
+        </div>
+        <div class="footer__section">
+            <h2 class="footer__title">Ubicacion</h2>
+            <p class="footer__txt">Trujillo, Peru</p>
+            <h2 class="footer__title">Contacto</h2>
+            <p class="footer__txt">Celular: 999999942</p>
+            <p class="footer__txt">Correo: renzosanesp@hotmail.com</p>
+        </div>
+        <div class="footer__section">
+            <h2 class="footer__title">Quick Links</h2>
+            <a href="" class="footer__link">Home</a>
+            <a href="" class="footer__link">Shop</a>
+            <a href="" class="footer__link">Contact Us</a>
+        </div>
+        <div class="footer__section">
+            <h2 class="footer__title">Suscribete para recibir ofertas</h2>
+            <p class="footer__txt">Al suscribirse a nuestra lista de correo, siempre recibirá nuestras últimas noticias y actualizaciones.</p>
+            <input type="email" class="footer__input" placeholder="Ingresa tu email">
+        </div>
+        <p class="copy">© 2021 BAZAR ESPEJO. All Rights Reserved</p>
+
+    </footer>
+    <script src="../js/slider.js"></script>
+    <script src="../js/slider.js"></script>
+    <script src="../js/login.js"></script>
 </body>
-<footer class="main-footer">
-    <div class="footer__section">
-        <h2 class="footer__title">Sobre Nosotros</h2>
-        <p class="footer__txt">Somos una empresa dedicada a la venta online de ropa. Nuestro objetivo es ofrecer la moda más actual a los mejores precios.
-            Tenemos a su disposición una gran variedad de productos, los cuales son renovados cada temporada.
-            Tenemos un equipo que está dedicado a satisfacer tus necesidades y que te contestará a tus dudas con la mayor brevedad posible.</p>
-    </div>
-    <div class="footer__section">
-        <h2 class="footer__title">Ubicacion</h2>
-        <p class="footer__txt">Trujillo, Peru</p>
-        <h2 class="footer__title">Contacto</h2>
-        <p class="footer__txt">Celular: 999999942</p>
-        <p class="footer__txt">Correo: renzosanesp@hotmail.com</p>
-    </div>
-    <div class="footer__section">
-        <h2 class="footer__title">Quick Links</h2>
-        <a href="" class="footer__link">Home</a>
-        <a href="" class="footer__link">Shop</a>
-        <a href="" class="footer__link">Contact Us</a>
-    </div>
-    <div class="footer__section">
-        <h2 class="footer__title">Suscribete para recibir ofertas</h2>
-        <p class="footer__txt">Al suscribirse a nuestra lista de correo, siempre recibirá nuestras últimas noticias y actualizaciones.</p>
-        <input type="email" class="footer__input" placeholder="Ingresa tu email">
-    </div>
-    <p class="copy">© 2021 BAZAR ESPEJO. All Rights Reserved</p>
-
-</footer>
-<script src="../js/slider.js"></script>
-<script src="../js/slider.js"></script>
-<script src="../js/login.js"></script>
-
 
 </html>

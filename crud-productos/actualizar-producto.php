@@ -1,5 +1,5 @@
 <?php
-include("/xamp/htdocs/PaginaWeb/php/conexion.php");
+include("../php/conexion.php");
 
 $id_producto = $_GET['id_producto'];
 
@@ -50,17 +50,18 @@ $row = mysqli_fetch_array($query);
     </header>
     <div class="container mt-5">
         <h1>Actualizar Datos del Producto</h1>
-        <form action="../crud-productos/producto.php" class="menu__link" method="POST">
+        <form action="./insertar-producto.php" class="menu__link" method="POST" enctype="multipart/form-data">
 
             <input type="hidden" name="id_producto" value="<?php echo $row['id_producto']  ?>">
 
             <input type="text" class="form-control mb-3" name="nombre_producto" placeholder="Nombre del Producto" value="<?php echo $row['nombre_producto']  ?>">
             <div class="mb-3">
-                <textarea class="form-control mb-3" name="desc_producto" id="exampleFormControlTextarea1" rows="3" placeholder="Descripcion del Producto" value="<?php echo $row['descripcion_producto']  ?>" ></textarea>
+                <textarea class="form-control mb-3" name="descripcion_producto" id="exampleFormControlTextarea1" rows="3" placeholder="Descripcion del Producto"><?php echo $row['descripcion_producto'] ?></textarea>
             </div>
             <input type="text" class="form-control mb-3" name="talla_producto" placeholder="Talla del Producto" value="<?php echo $row['talla_producto']  ?>">
-            <input type="text" class="form-control mb-3" name="Precio_producto" placeholder="Precio" value="<?php echo $row['precio_producto']  ?>">
-            <input type="submit" class="btn btn-primary btn-block" value="Actualizar">
+            <input type="text" class="form-control mb-3" name="precio_producto" placeholder="Precio" value="<?php echo $row['precio_producto']  ?>">
+            <input type="file" class="form-control mb-3" name="imagen_producto" id="imagen_producto" required>
+            <input type="submit" name="btnUpdateProducto" class="btn btn-primary btn-block" value="Actualizar">
         </form>
 
     </div>
